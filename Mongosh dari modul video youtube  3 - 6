@@ -1,0 +1,785 @@
+Microsoft Windows [Version 10.0.26200.8457]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\User>mongosh
+Current Mongosh Log ID: 6a1ae7187e143e7bedabc113
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.8.3
+Using MongoDB:          8.3.2
+Using Mongosh:          2.8.3
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2026-05-28T11:42:14.842+03:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> // DATABASE & COLLECTION
+
+test> // menampilkan list db
+
+test> show dbs
+admin       40.00 KiB
+config     100.00 KiB
+family      72.00 KiB
+local       72.00 KiB
+mahasiswa   72.00 KiB
+matkul      40.00 KiB
+test>
+
+test> // membuat db
+
+test> use pinjambuku
+switched to db pinjambuku
+pinjambuku>
+
+pinjambuku> show dbs
+admin       40.00 KiB
+config     100.00 KiB
+family      72.00 KiB
+local       72.00 KiB
+mahasiswa   72.00 KiB
+matkul      40.00 KiB
+pinjambuku>
+
+pinjambuku> // cek db aktif
+
+pinjambuku> db
+pinjambuku
+pinjambuku>
+
+pinjambuku> // membuat collection
+
+pinjambuku> db.createCollection("peminjaman")
+{ ok: 1 }
+pinjambuku>
+
+pinjambuku> // cek collection
+
+pinjambuku> show collections
+peminjaman
+pinjambuku>
+
+pinjambuku> show dbs
+admin        40.00 KiB
+config      108.00 KiB
+family       72.00 KiB
+local        72.00 KiB
+mahasiswa    72.00 KiB
+matkul       40.00 KiB
+pinjambuku    8.00 KiB
+pinjambuku>
+
+pinjambuku> // hapus collection
+
+pinjambuku> db.peminjaman.drop()
+true
+pinjambuku>
+
+pinjambuku> show collections
+
+pinjambuku>
+
+pinjambuku> // hapus db
+
+pinjambuku> db.dropDatabase()
+{ ok: 1, dropped: 'pinjambuku' }
+pinjambuku>
+
+pinjambuku> show dbs
+admin       40.00 KiB
+config     104.00 KiB
+family      72.00 KiB
+local       72.00 KiB
+mahasiswa   72.00 KiB
+matkul      40.00 KiB
+pinjambuku>
+pinjambuku> use test
+switched to db test
+test>
+
+test> // CREATE DOCUMENT
+
+test> // buat db
+
+test> use peminjaman
+switched to db peminjaman
+peminjaman>
+
+peminjaman> // buat collection
+
+peminjaman> db.createCollection("pinjambuku")
+{ ok: 1 }
+peminjaman>
+
+peminjaman> // buat document
+
+peminjaman> db.pinjambuku.insertOne({namapeminjam:"Ridho", kode_buku:1001})
+{
+  acknowledged: true,
+  insertedId: ObjectId('6a1aeff67e143e7bedabc114')
+}
+peminjaman>
+
+peminjaman> // lihat hasil
+
+peminjaman> db.pinjambuku.find().pretty()
+[
+  {
+    _id: ObjectId('6a1aeff67e143e7bedabc114'),
+    namapeminjam: 'Ridho',
+    kode_buku: 1001
+  }
+]
+peminjaman>
+
+peminjaman> // hapus document
+
+peminjaman> db.pinjambuku.remove({})
+DeprecationWarning: Collection.remove() is deprecated. Use deleteOne, deleteMany, findOneAndDelete, or bulkWrite.
+{ acknowledged: true, deletedCount: 1 }
+peminjaman>
+
+peminjaman> db.pinjambuku.find()
+
+peminjaman>
+
+peminjaman>  db.pinjambuku.insertOne({_id:1, namapeminjam:"Yuna", buku:"Laskar Pelangi", kode_buku:"BK001", tgl_pinjam:"05-01-2026", tgl_kembali:"12-01-2026"})
+{ acknowledged: true, insertedId: 1 }
+peminjaman>
+
+peminjaman> db.pinjambuku.find()
+[
+  {
+    _id: 1,
+    namapeminjam: 'Yuna',
+    buku: 'Laskar Pelangi',
+    kode_buku: 'BK001',
+    tgl_pinjam: '05-01-2026',
+    tgl_kembali: '12-01-2026'
+  }
+]
+peminjaman>
+
+peminjaman> // buat beberapa document
+
+peminjaman>  db.pinjambuku.insertMany([
+| {
+| _id: 2,
+| namapeminjam:"Ren",
+| buku:"Confession",
+| kode_buku:"BK002",
+| tgl_pinjam:"17-01-2026",
+| tgl_kembali:"24-01-2026"
+| },
+| {
+| _id: 3,
+| namapeminjam:"Riku",
+| buku:"Kimi No Nawa",
+| kode_buku:"BK003",
+| tgl_pinjam:"25-01-2026",
+| tgl_kembali:"01-02-2026"
+| },
+| {
+| _id: 4,
+| namapeminjam:"Hana",
+| buku:"Laut Bercerita",
+| kode_buku:"BK004",
+| tgl_pinjam:"03-02-2026",
+| tgl_kembali:"10-02-2026"
+| },
+| {
+| _id: 5,
+| namapeminjam:"Yuki",
+| buku:"Trash Of The Count's Family",
+| kode_buku:"BK005",
+| tgl_pinjam:"12-02-2026",
+| tgl_kembali:"19-02-2026"
+| }
+| ])
+{ acknowledged: true, insertedIds: { '0': 2, '1': 3, '2': 4, '3': 5 } }
+peminjaman>
+
+peminjaman> db.pinjambuku.find()
+[
+  {
+    _id: 1,
+    namapeminjam: 'Yuna',
+    buku: 'Laskar Pelangi',
+    kode_buku: 'BK001',
+    tgl_pinjam: '05-01-2026',
+    tgl_kembali: '12-01-2026'
+  },
+  {
+    _id: 2,
+    namapeminjam: 'Ren',
+    buku: 'Confession',
+    kode_buku: 'BK002',
+    tgl_pinjam: '17-01-2026',
+    tgl_kembali: '24-01-2026'
+  },
+  {
+    _id: 3,
+    namapeminjam: 'Riku',
+    buku: 'Kimi No Nawa',
+    kode_buku: 'BK003',
+    tgl_pinjam: '25-01-2026',
+    tgl_kembali: '01-02-2026'
+  },
+  {
+    _id: 4,
+    namapeminjam: 'Hana',
+    buku: 'Laut Bercerita',
+    kode_buku: 'BK004',
+    tgl_pinjam: '03-02-2026',
+    tgl_kembali: '10-02-2026'
+  },
+  {
+    _id: 5,
+    namapeminjam: 'Yuki',
+    buku: "Trash Of The Count's Family",
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026'
+  }
+]
+peminjaman>
+peminjaman> // READ DOCUMENT
+
+peminjaman> db.pinjambuku.find()
+[
+  {
+    _id: 1,
+    namapeminjam: 'Yuna',
+    buku: 'Laskar Pelangi',
+    kode_buku: 'BK001',
+    tgl_pinjam: '05-01-2026',
+    tgl_kembali: '12-01-2026'
+  },
+  {
+    _id: 2,
+    namapeminjam: 'Ren',
+    buku: 'Confession',
+    kode_buku: 'BK002',
+    tgl_pinjam: '17-01-2026',
+    tgl_kembali: '24-01-2026'
+  },
+  {
+    _id: 3,
+    namapeminjam: 'Riku',
+    buku: 'Kimi No Nawa',
+    kode_buku: 'BK003',
+    tgl_pinjam: '25-01-2026',
+    tgl_kembali: '01-02-2026'
+  },
+  {
+    _id: 4,
+    namapeminjam: 'Hana',
+    buku: 'Laut Bercerita',
+    kode_buku: 'BK004',
+    tgl_pinjam: '03-02-2026',
+    tgl_kembali: '10-02-2026'
+  },
+  {
+    _id: 5,
+    namapeminjam: 'Yuki',
+    buku: "Trash Of The Count's Family",
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026'
+  }
+]
+peminjaman>
+
+peminjaman> // menampilkan berdasarkan kriteria
+
+peminjaman> db.pinjambuku.find({namapeminjam:"Riku"})
+[
+  {
+    _id: 3,
+    namapeminjam: 'Riku',
+    buku: 'Kimi No Nawa',
+    kode_buku: 'BK003',
+    tgl_pinjam: '25-01-2026',
+    tgl_kembali: '01-02-2026'
+  }
+]
+peminjaman>
+peminjaman> db.pinjambuku.find({kode_buku:"BK004"})
+[
+  {
+    _id: 4,
+    namapeminjam: 'Hana',
+    buku: 'Laut Bercerita',
+    kode_buku: 'BK004',
+    tgl_pinjam: '03-02-2026',
+    tgl_kembali: '10-02-2026'
+  }
+]
+peminjaman>
+
+peminjaman> // menamoilkan jumlah document
+
+peminjaman> db.pinjambuku.find().count()
+5
+peminjaman>
+
+peminjaman> // limit : membatasi tampilan
+
+peminjaman> db.pinjambuku.find().limit(3)
+[
+  {
+    _id: 1,
+    namapeminjam: 'Yuna',
+    buku: 'Laskar Pelangi',
+    kode_buku: 'BK001',
+    tgl_pinjam: '05-01-2026',
+    tgl_kembali: '12-01-2026'
+  },
+  {
+    _id: 2,
+    namapeminjam: 'Ren',
+    buku: 'Confession',
+    kode_buku: 'BK002',
+    tgl_pinjam: '17-01-2026',
+    tgl_kembali: '24-01-2026'
+  },
+  {
+    _id: 3,
+    namapeminjam: 'Riku',
+    buku: 'Kimi No Nawa',
+    kode_buku: 'BK003',
+    tgl_pinjam: '25-01-2026',
+    tgl_kembali: '01-02-2026'
+  }
+]
+peminjaman>
+
+peminjaman> // skip tampilan
+
+peminjaman> db.pinjambuku.find().skip(2)
+[
+  {
+    _id: 3,
+    namapeminjam: 'Riku',
+    buku: 'Kimi No Nawa',
+    kode_buku: 'BK003',
+    tgl_pinjam: '25-01-2026',
+    tgl_kembali: '01-02-2026'
+  },
+  {
+    _id: 4,
+    namapeminjam: 'Hana',
+    buku: 'Laut Bercerita',
+    kode_buku: 'BK004',
+    tgl_pinjam: '03-02-2026',
+    tgl_kembali: '10-02-2026'
+  },
+  {
+    _id: 5,
+    namapeminjam: 'Yuki',
+    buku: "Trash Of The Count's Family",
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026'
+  }
+]
+peminjaman>
+
+peminjaman> // sort : mengurutkan document
+
+peminjaman> // ascending
+
+peminjaman> db.pinjambuku.find().sort({_id:1})
+[
+  {
+    _id: 1,
+    namapeminjam: 'Yuna',
+    buku: 'Laskar Pelangi',
+    kode_buku: 'BK001',
+    tgl_pinjam: '05-01-2026',
+    tgl_kembali: '12-01-2026'
+  },
+  {
+    _id: 2,
+    namapeminjam: 'Ren',
+    buku: 'Confession',
+    kode_buku: 'BK002',
+    tgl_pinjam: '17-01-2026',
+    tgl_kembali: '24-01-2026'
+  },
+  {
+    _id: 3,
+    namapeminjam: 'Riku',
+    buku: 'Kimi No Nawa',
+    kode_buku: 'BK003',
+    tgl_pinjam: '25-01-2026',
+    tgl_kembali: '01-02-2026'
+  },
+  {
+    _id: 4,
+    namapeminjam: 'Hana',
+    buku: 'Laut Bercerita',
+    kode_buku: 'BK004',
+    tgl_pinjam: '03-02-2026',
+    tgl_kembali: '10-02-2026'
+  },
+  {
+    _id: 5,
+    namapeminjam: 'Yuki',
+    buku: "Trash Of The Count's Family",
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026'
+  }
+]
+peminjaman>
+
+peminjaman> // descending
+
+peminjaman> db.pinjambuku.find().sort({_id:-1})
+[
+  {
+    _id: 5,
+    namapeminjam: 'Yuki',
+    buku: "Trash Of The Count's Family",
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026'
+  },
+  {
+    _id: 4,
+    namapeminjam: 'Hana',
+    buku: 'Laut Bercerita',
+    kode_buku: 'BK004',
+    tgl_pinjam: '03-02-2026',
+    tgl_kembali: '10-02-2026'
+  },
+  {
+    _id: 3,
+    namapeminjam: 'Riku',
+    buku: 'Kimi No Nawa',
+    kode_buku: 'BK003',
+    tgl_pinjam: '25-01-2026',
+    tgl_kembali: '01-02-2026'
+  },
+  {
+    _id: 2,
+    namapeminjam: 'Ren',
+    buku: 'Confession',
+    kode_buku: 'BK002',
+    tgl_pinjam: '17-01-2026',
+    tgl_kembali: '24-01-2026'
+  },
+  {
+    _id: 1,
+    namapeminjam: 'Yuna',
+    buku: 'Laskar Pelangi',
+    kode_buku: 'BK001',
+    tgl_pinjam: '05-01-2026',
+    tgl_kembali: '12-01-2026'
+  }
+]
+peminjaman>
+peminjaman> // UPDATE DOCUMENT
+
+peminjaman> // update sebuah document
+
+peminjaman> // namapeminjam:Ren, buku:Confession = buku: Hashire, Melos!
+
+peminjaman> db.pinjambuku.updateOne(
+| {namapeminjam:"Ren"},
+| {$set:{buku:"Hashire, Melos!"}}
+| )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+peminjaman>
+
+peminjaman> db.pinjambuku.find()
+[
+  {
+    _id: 1,
+    namapeminjam: 'Yuna',
+    buku: 'Laskar Pelangi',
+    kode_buku: 'BK001',
+    tgl_pinjam: '05-01-2026',
+    tgl_kembali: '12-01-2026'
+  },
+  {
+    _id: 2,
+    namapeminjam: 'Ren',
+    buku: 'Hashire, Melos!',
+    kode_buku: 'BK002',
+    tgl_pinjam: '17-01-2026',
+    tgl_kembali: '24-01-2026'
+  },
+  {
+    _id: 3,
+    namapeminjam: 'Riku',
+    buku: 'Kimi No Nawa',
+    kode_buku: 'BK003',
+    tgl_pinjam: '25-01-2026',
+    tgl_kembali: '01-02-2026'
+  },
+  {
+    _id: 4,
+    namapeminjam: 'Hana',
+    buku: 'Laut Bercerita',
+    kode_buku: 'BK004',
+    tgl_pinjam: '03-02-2026',
+    tgl_kembali: '10-02-2026'
+  },
+  {
+    _id: 5,
+    namapeminjam: 'Yuki',
+    buku: "Trash Of The Count's Family",
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026'
+  }
+]
+peminjaman>
+peminjaman> //  update beberapa
+
+peminjaman> // nama: Hana, Yuki = Rika
+
+peminjaman> db.pinjambuku.updateMany(
+| {namapeminjam:{$in:["Hana","Yuki"]}},
+| {$set:{namapeminjam:"Rika"}}
+| )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+peminjaman>
+peminjaman> db.pinjambuku.find()
+[
+  {
+    _id: 1,
+    namapeminjam: 'Yuna',
+    buku: 'Laskar Pelangi',
+    kode_buku: 'BK001',
+    tgl_pinjam: '05-01-2026',
+    tgl_kembali: '12-01-2026'
+  },
+  {
+    _id: 2,
+    namapeminjam: 'Ren',
+    buku: 'Hashire, Melos!',
+    kode_buku: 'BK002',
+    tgl_pinjam: '17-01-2026',
+    tgl_kembali: '24-01-2026'
+  },
+  {
+    _id: 3,
+    namapeminjam: 'Riku',
+    buku: 'Kimi No Nawa',
+    kode_buku: 'BK003',
+    tgl_pinjam: '25-01-2026',
+    tgl_kembali: '01-02-2026'
+  },
+  {
+    _id: 4,
+    namapeminjam: 'Rika',
+    buku: 'Laut Bercerita',
+    kode_buku: 'BK004',
+    tgl_pinjam: '03-02-2026',
+    tgl_kembali: '10-02-2026'
+  },
+  {
+    _id: 5,
+    namapeminjam: 'Rika',
+    buku: "Trash Of The Count's Family",
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026'
+  }
+]
+peminjaman>
+peminjaman> // mengganti document
+
+peminjaman> db.pinjambuku.replaceOne(
+| {_id:4},
+| { namapeminjam: "Yuda", buku: "Laut Bercerita", pengarang: "Leila S. Chudori", kode_buku: "BK005", tgl_pinjam: "12-02-2026", tgl_kembali: "19-02-2026" }
+| )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+peminjaman>
+
+peminjaman> db.pinjambuku.find()
+[
+  {
+    _id: 1,
+    namapeminjam: 'Yuna',
+    buku: 'Laskar Pelangi',
+    kode_buku: 'BK001',
+    tgl_pinjam: '05-01-2026',
+    tgl_kembali: '12-01-2026'
+  },
+  {
+    _id: 2,
+    namapeminjam: 'Ren',
+    buku: 'Hashire, Melos!',
+    kode_buku: 'BK002',
+    tgl_pinjam: '17-01-2026',
+    tgl_kembali: '24-01-2026'
+  },
+  {
+    _id: 3,
+    namapeminjam: 'Riku',
+    buku: 'Kimi No Nawa',
+    kode_buku: 'BK003',
+    tgl_pinjam: '25-01-2026',
+    tgl_kembali: '01-02-2026'
+  },
+  {
+    _id: 4,
+    namapeminjam: 'Yuda',
+    buku: 'Laut Bercerita',
+    pengarang: 'Leila S. Chudori',
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026'
+  },
+  {
+    _id: 5,
+    namapeminjam: 'Rika',
+    buku: "Trash Of The Count's Family",
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026'
+  }
+]
+peminjaman>
+peminjaman> // unset : menghapus field dan value
+
+peminjaman> db.pinjambuku.updateOne(
+| { _id: 4 },
+| { $unset: { pengarang: "" } }
+| )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+peminjaman>
+
+peminjaman> db.pinjambuku.find()
+[
+  {
+    _id: 1,
+    namapeminjam: 'Yuna',
+    buku: 'Laskar Pelangi',
+    kode_buku: 'BK001',
+    tgl_pinjam: '05-01-2026',
+    tgl_kembali: '12-01-2026'
+  },
+  {
+    _id: 2,
+    namapeminjam: 'Ren',
+    buku: 'Hashire, Melos!',
+    kode_buku: 'BK002',
+    tgl_pinjam: '17-01-2026',
+    tgl_kembali: '24-01-2026'
+  },
+  {
+    _id: 3,
+    namapeminjam: 'Riku',
+    buku: 'Kimi No Nawa',
+    kode_buku: 'BK003',
+    tgl_pinjam: '25-01-2026',
+    tgl_kembali: '01-02-2026'
+  },
+  {
+    _id: 4,
+    namapeminjam: 'Yuda',
+    buku: 'Laut Bercerita',
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026'
+  },
+  {
+    _id: 5,
+    namapeminjam: 'Rika',
+    buku: "Trash Of The Count's Family",
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026'
+  }
+]
+peminjaman>
+
+peminjaman> // rename: mengganti nama field
+
+peminjaman> db.pinjambuku.updateOne(
+| { _id: 4 },
+| { $rename: { "buku": "namabuku" } }
+| )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+peminjaman>
+
+peminjaman> db.pinjambuku.find()
+[
+  {
+    _id: 1,
+    namapeminjam: 'Yuna',
+    buku: 'Laskar Pelangi',
+    kode_buku: 'BK001',
+    tgl_pinjam: '05-01-2026',
+    tgl_kembali: '12-01-2026'
+  },
+  {
+    _id: 2,
+    namapeminjam: 'Ren',
+    buku: 'Hashire, Melos!',
+    kode_buku: 'BK002',
+    tgl_pinjam: '17-01-2026',
+    tgl_kembali: '24-01-2026'
+  },
+  {
+    _id: 3,
+    namapeminjam: 'Riku',
+    buku: 'Kimi No Nawa',
+    kode_buku: 'BK003',
+    tgl_pinjam: '25-01-2026',
+    tgl_kembali: '01-02-2026'
+  },
+  {
+    _id: 4,
+    namapeminjam: 'Yuda',
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026',
+    namabuku: 'Laut Bercerita'
+  },
+  {
+    _id: 5,
+    namapeminjam: 'Rika',
+    buku: "Trash Of The Count's Family",
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026'
+  }
+]
+
