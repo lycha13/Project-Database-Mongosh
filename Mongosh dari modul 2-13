@@ -1,0 +1,312 @@
+Microsoft Windows [Version 10.0.26200.8457]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\User>mongosh
+Current Mongosh Log ID: 6a1aae059eeec126d4abc113
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.8.3
+Using MongoDB:          8.3.2
+Using Mongosh:          2.8.3
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2026-05-28T11:42:14.842+03:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> // database and collection
+
+test> // menampilkan list db
+
+test> show dbs
+admin      40.00 KiB
+config     72.00 KiB
+family     72.00 KiB
+local      72.00 KiB
+mahasiswa  72.00 KiB
+matkul     40.00 KiB
+test>
+
+test> // membuat db
+
+test> use perpustakaan
+switched to db perpustakaan
+perpustakaan>
+
+perpustakaan> show dbs
+admin      40.00 KiB
+config     72.00 KiB
+family     72.00 KiB
+local      72.00 KiB
+mahasiswa  72.00 KiB
+matkul     40.00 KiB
+perpustakaan>
+
+perpustakaan> // cek db aktif
+
+perpustakaan> db
+perpustakaan
+perpustakaan>
+
+perpustakaan> // membuat collection
+
+perpustakaan> db.createCollection("Peminjam")
+{ ok: 1 }
+perpustakaan>
+
+perpustakaan> db.createCollection("Buku")
+{ ok: 1 }
+perpustakaan>
+
+perpustakaan> //cek collection
+
+perpustakaan> show collections
+Buku
+Peminjam
+perpustakaan>
+
+perpustakaan> show dbs
+admin          40.00 KiB
+config        108.00 KiB
+family         72.00 KiB
+local          72.00 KiB
+mahasiswa      72.00 KiB
+matkul         40.00 KiB
+perpustakaan   16.00 KiB
+perpustakaan>
+
+perpustakaan> // menghapus collection
+
+perpustakaan> db.Peminjam.drop()
+true
+perpustakaan>
+
+perpustakaan> show collections
+Buku
+perpustakaan>
+
+perpustakaan> // menghapus db
+
+perpustakaan> db.dropDatabase()
+{ ok: 1, dropped: 'perpustakaan' }
+perpustakaan>
+
+perpustakaan> show dbs
+admin       40.00 KiB
+config     108.00 KiB
+family      72.00 KiB
+local       72.00 KiB
+mahasiswa   72.00 KiB
+matkul      40.00 KiB
+perpustakaan>
+
+perpustakaan> db.Buku.drop()
+true
+perpustakaan>
+
+perpustakaan> // create document
+
+perpustakaan> // buat collection
+
+perpustakaan> db.createCollection("Peminjaman")
+{ ok: 1 }
+perpustakaan>
+
+perpustakaan> // buat sebuah document
+
+perpustakaan> db.Peminjaman.insertOne({ peminjam:"Ahmad", kode_anggota:1001})
+{
+  acknowledged: true,
+  insertedId: ObjectId('6a1ab4dd9eeec126d4abc114')
+}
+perpustakaan>
+
+perpustakaan> // lihat hasil document
+
+perpustakaan> db.Peminjam.find().pretty()
+
+perpustakaan>
+
+perpustakaan> // lihat hasil document
+
+perpustakaan> db.Peminjaman.find().pretty()
+[
+  {
+    _id: ObjectId('6a1ab4dd9eeec126d4abc114'),
+    peminjam: 'Ahmad',
+    kode_anggota: 1001
+  }
+]
+perpustakaan>
+
+perpustakaan> // hapus document
+
+perpustakaan> db.Peminjaman.remove({})
+DeprecationWarning: Collection.remove() is deprecated. Use deleteOne, deleteMany, findOneAndDelete, or bulkWrite.
+{ acknowledged: true, deletedCount: 1 }
+perpustakaan>
+
+perpustakaan> db.Peminjaman.find()
+
+perpustakaan>
+
+perpustakaan> db.Peminjaman.insertOne({ peminjam:"Ahmad", kode_anggota:1perpustakaan> db.Peminjaman.insertOne({ peminjam:"Ahmad", kode_anggota:1001
+|
+| }
+| })
+Uncaught:
+SyntaxError: Unexpected token, expected "," (4:0)
+
+  2 |
+  3 | }
+> 4 | })
+    | ^
+  5 |
+
+perpustakaan> db.Peminjaman.insertOne({ peminjam:"Ahmad", kode_anggota:1perpustakaan> db.Peminjaman.insertOne({ peminjam:"Ahmad", kode_anggota:1001}){})
+Uncaught:
+SyntaxError: Missing semicolon. (1:63)
+
+> 1 | db.Peminjaman.insertOne({ peminjam:"Ahmad", kode_anggota:1001}){})
+    |                                                                ^
+  2 |
+
+perpustakaan> db.Peminjaman.insertOne({ peminjam:"Rudi", kode_anggota:1001, buku:"Laskar Pelangi", tgl_pinjam:30-05-2026, tgl_kembali:12-05-2026})
+{
+  acknowledged: true,
+  insertedId: ObjectId('6a1abd649eeec126d4abc115')
+}
+perpustakaan>
+
+perpustakaan> db.Peminjaman.find()
+[
+  {
+    _id: ObjectId('6a1abd649eeec126d4abc115'),
+    peminjam: 'Rudi',
+    kode_anggota: 1001,
+    buku: 'Laskar Pelangi',
+    tgl_pinjam: -2001,
+    tgl_kembali: -2019
+  }
+]
+perpustakaan> db.Peminjaman.remove({})
+{ acknowledged: true, deletedCount: 1 }
+perpustakaan> db.Peminjaman.find()
+
+perpustakaan>
+
+perpustakaan>  db.Peminjaman.insertOne({
+| peminjam:"Rudi",
+| kode_anggota:1001,
+| buku:"Laskar Pelangi",
+| tgl_pinjam:"30-05-2026",
+| tgl_kembali:"12-06-2026"
+| })
+{
+  acknowledged: true,
+  insertedId: ObjectId('6a1acd569eeec126d4abc116')
+}
+perpustakaan>
+
+perpustakaan> db.Peminjaman.find()
+[
+  {
+    _id: ObjectId('6a1acd569eeec126d4abc116'),
+    peminjam: 'Rudi',
+    kode_anggota: 1001,
+    buku: 'Laskar Pelangi',
+    tgl_pinjam: '30-05-2026',
+    tgl_kembali: '12-06-2026'
+  }
+]
+perpustakaan>
+
+perpustakaan> // buat beberapa document
+
+perpustakaan> db.Peminjaman.insertMany([
+| {
+| peminjam:"Rina",
+| kode_anggota:1002,
+| buku:"Confession",
+| tgl_pinjam:"13-08-2026",
+| tgl_kembali:"20-08-2026"
+| },
+| {
+| peminjam:"Dita",
+| kode_anggota:1003,
+| buku:"Kimi No Nawa",
+| tgl_pinjam:"02-09-2026",
+| tgl_kembali:"09-09-2026"
+| },
+| {
+| peminjam:"Ren",
+| kode_anggota:1004,
+| buku:"Laut Bercerita",
+| tgl_pinjam:"26-10-2026",
+| tgl_kembali:"03-11-2026"
+| },
+| {
+| peminjam:"Yuki",
+| kode_anggota:1005,
+| buku:"Trash Of The Count's Family",
+| tgl_pinjam:"15-12-2026",
+| tgl_kembali:"22-12-2026"
+| }
+| ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6a1ad2059eeec126d4abc117'),
+    '1': ObjectId('6a1ad2059eeec126d4abc118'),
+    '2': ObjectId('6a1ad2059eeec126d4abc119'),
+    '3': ObjectId('6a1ad2059eeec126d4abc11a')
+  }
+}
+perpustakaan>
+
+perpustakaan> db.Peminjaman.find()
+[
+  {
+    _id: ObjectId('6a1acd569eeec126d4abc116'),
+    peminjam: 'Rudi',
+    kode_anggota: 1001,
+    buku: 'Laskar Pelangi',
+    tgl_pinjam: '30-05-2026',
+    tgl_kembali: '12-06-2026'
+  },
+  {
+    _id: ObjectId('6a1ad2059eeec126d4abc117'),
+    peminjam: 'Rina',
+    kode_anggota: 1002,
+    buku: 'Confession',
+    tgl_pinjam: '13-08-2026',
+    tgl_kembali: '20-08-2026'
+  },
+  {
+    _id: ObjectId('6a1ad2059eeec126d4abc118'),
+    peminjam: 'Dita',
+    kode_anggota: 1003,
+    buku: 'Kimi No Nawa',
+    tgl_pinjam: '02-09-2026',
+    tgl_kembali: '09-09-2026'
+  },
+  {
+    _id: ObjectId('6a1ad2059eeec126d4abc119'),
+    peminjam: 'Ren',
+    kode_anggota: 1004,
+    buku: 'Laut Bercerita',
+    tgl_pinjam: '26-10-2026',
+    tgl_kembali: '03-11-2026'
+  },
+  {
+    _id: ObjectId('6a1ad2059eeec126d4abc11a'),
+    peminjam: 'Yuki',
+    kode_anggota: 1005,
+    buku: "Trash Of The Count's Family",
+    tgl_pinjam: '15-12-2026',
+    tgl_kembali: '22-12-2026'
+  }
+]
+perpustakaan>
+
+perpustakaan>
