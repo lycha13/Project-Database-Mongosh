@@ -783,3 +783,321 @@ peminjaman> db.pinjambuku.find()
   }
 ]
 
+peminjaman> // DELETE DOCUMENT
+
+peminjaman> db.coba.find()
+
+peminjaman> use perpustakaan
+|
+| db.createCollection("koleksibuku")
+switched to db perpustakaan
+perpustakaan> db.createCollection("koleksibuku")
+{ ok: 1 }
+perpustakaan> db.koleksibuku.insertMany([
+| {
+|     _id: 1,
+|     judul: "Bumi",
+|     penulis: "Tere Liye",
+|     kategori: "Novel",
+|     tahun_terbit: 2014,
+|     stok: 8
+| },
+| {
+|     _id: 2,
+|     judul: "Laut Bercerita",
+|     penulis: "Leila S. Chudori",
+|     kategori: "Novel",
+|     tahun_terbit: 2017,
+|     stok: 5
+| },
+| {
+|     _id: 3,
+|     judul: "Atomic Habits",
+|     penulis: "James Clear",
+|     kategori: "Pengembangan Diri",
+|     tahun_terbit: 2018,
+|     stok: 7
+| },
+| {
+|     _id: 4,
+|     judul: "Filosofi Teras",
+|     penulis: "Henry Manampiring",
+|     kategori: "Psikologi",
+|     tahun_terbit: 2018,
+|     stok: 4
+| },
+| {
+|     _id: 5,
+|     judul: "Negeri 5 Menara",
+|     penulis: "Ahmad Fuadi",
+|     kategori: "Novel",
+|     tahun_terbit: 2009,
+|     stok: 6
+| },
+| {
+|     _id: 6,
+|     judul: "Rich Dad Poor Dad",
+|     penulis: "Robert Kiyosaki",
+|     kategori: "Keuangan",
+|     tahun_terbit: 1997,
+|     stok: 3
+| },
+| {
+|     _id: 7,
+|     judul: "The Psychology of Money",
+|     penulis: "Morgan Housel",
+|     kategori: "Keuangan",
+|     tahun_terbit: 2020,
+|     stok: 5
+| }
+| ])
+{
+  acknowledged: true,
+  insertedIds: { '0': 1, '1': 2, '2': 3, '3': 4, '4': 5, '5': 6, '6': 7 }
+}
+perpustakaan>
+
+perpustakaan> db.koleksibuku.find()
+[
+  {
+    _id: 1,
+    judul: 'Bumi',
+    penulis: 'Tere Liye',
+    kategori: 'Novel',
+    tahun_terbit: 2014,
+    stok: 8
+  },
+  {
+    _id: 2,
+    judul: 'Laut Bercerita',
+    penulis: 'Leila S. Chudori',
+    kategori: 'Novel',
+    tahun_terbit: 2017,
+    stok: 5
+  },
+  {
+    _id: 3,
+    judul: 'Atomic Habits',
+    penulis: 'James Clear',
+    kategori: 'Pengembangan Diri',
+    tahun_terbit: 2018,
+    stok: 7
+  },
+  {
+    _id: 4,
+    judul: 'Filosofi Teras',
+    penulis: 'Henry Manampiring',
+    kategori: 'Psikologi',
+    tahun_terbit: 2018,
+    stok: 4
+  },
+  {
+    _id: 5,
+    judul: 'Negeri 5 Menara',
+    penulis: 'Ahmad Fuadi',
+    kategori: 'Novel',
+    tahun_terbit: 2009,
+    stok: 6
+  },
+  {
+    _id: 6,
+    judul: 'Rich Dad Poor Dad',
+    penulis: 'Robert Kiyosaki',
+    kategori: 'Keuangan',
+    tahun_terbit: 1997,
+    stok: 3
+  },
+  {
+    _id: 7,
+    judul: 'The Psychology of Money',
+    penulis: 'Morgan Housel',
+    kategori: 'Keuangan',
+    tahun_terbit: 2020,
+    stok: 5
+  }
+]
+perpustakaan>
+
+perpustakaan> // DELETE DOCUMENT
+
+perpustakaan> db.koleksibuku.find()
+[
+  {
+    _id: 1,
+    judul: 'Bumi',
+    penulis: 'Tere Liye',
+    kategori: 'Novel',
+    tahun_terbit: 2014,
+    stok: 8
+  },
+  {
+    _id: 2,
+    judul: 'Laut Bercerita',
+    penulis: 'Leila S. Chudori',
+    kategori: 'Novel',
+    tahun_terbit: 2017,
+    stok: 5
+  },
+  {
+    _id: 3,
+    judul: 'Atomic Habits',
+    penulis: 'James Clear',
+    kategori: 'Pengembangan Diri',
+    tahun_terbit: 2018,
+    stok: 7
+  },
+  {
+    _id: 4,
+    judul: 'Filosofi Teras',
+    penulis: 'Henry Manampiring',
+    kategori: 'Psikologi',
+    tahun_terbit: 2018,
+    stok: 4
+  },
+  {
+    _id: 5,
+    judul: 'Negeri 5 Menara',
+    penulis: 'Ahmad Fuadi',
+    kategori: 'Novel',
+    tahun_terbit: 2009,
+    stok: 6
+  },
+  {
+    _id: 6,
+    judul: 'Rich Dad Poor Dad',
+    penulis: 'Robert Kiyosaki',
+    kategori: 'Keuangan',
+    tahun_terbit: 1997,
+    stok: 3
+  },
+  {
+    _id: 7,
+    judul: 'The Psychology of Money',
+    penulis: 'Morgan Housel',
+    kategori: 'Keuangan',
+    tahun_terbit: 2020,
+    stok: 5
+  }
+]
+perpustakaan>
+
+perpustakaan> // delete one
+
+perpustakaan> db.koleksibuku.deleteOne({judul:"The Psychology of Money"})
+{ acknowledged: true, deletedCount: 1 }
+perpustakaan> db.koleksibuku.find()
+[
+  {
+    _id: 1,
+    judul: 'Bumi',
+    penulis: 'Tere Liye',
+    kategori: 'Novel',
+    tahun_terbit: 2014,
+    stok: 8
+  },
+  {
+    _id: 2,
+    judul: 'Laut Bercerita',
+    penulis: 'Leila S. Chudori',
+    kategori: 'Novel',
+    tahun_terbit: 2017,
+    stok: 5
+  },
+  {
+    _id: 3,
+    judul: 'Atomic Habits',
+    penulis: 'James Clear',
+    kategori: 'Pengembangan Diri',
+    tahun_terbit: 2018,
+    stok: 7
+  },
+  {
+    _id: 4,
+    judul: 'Filosofi Teras',
+    penulis: 'Henry Manampiring',
+    kategori: 'Psikologi',
+    tahun_terbit: 2018,
+    stok: 4
+  },
+  {
+    _id: 5,
+    judul: 'Negeri 5 Menara',
+    penulis: 'Ahmad Fuadi',
+    kategori: 'Novel',
+    tahun_terbit: 2009,
+    stok: 6
+  },
+  {
+    _id: 6,
+    judul: 'Rich Dad Poor Dad',
+    penulis: 'Robert Kiyosaki',
+    kategori: 'Keuangan',
+    tahun_terbit: 1997,
+    stok: 3
+  }
+]
+perpustakaan>
+
+perpustakaan> // delete Many
+
+perpustakaan> db.koleksibuku.deleteMany({kategori:"Novel"})
+{ acknowledged: true, deletedCount: 3 }
+perpustakaan>
+
+perpustakaan> db.koleksibuku.find()
+[
+  {
+    _id: 3,
+    judul: 'Atomic Habits',
+    penulis: 'James Clear',
+    kategori: 'Pengembangan Diri',
+    tahun_terbit: 2018,
+    stok: 7
+  },
+  {
+    _id: 4,
+    judul: 'Filosofi Teras',
+    penulis: 'Henry Manampiring',
+    kategori: 'Psikologi',
+    tahun_terbit: 2018,
+    stok: 4
+  },
+  {
+    _id: 6,
+    judul: 'Rich Dad Poor Dad',
+    penulis: 'Robert Kiyosaki',
+    kategori: 'Keuangan',
+    tahun_terbit: 1997,
+    stok: 3
+  }
+]
+perpustakaan>
+
+perpustakaan> // REMOVE
+
+perpustakaan> db.koleksibuku.remove({})
+DeprecationWarning: Collection.remove() is deprecated. Use deleteOne, deleteMany, findOneAndDelete, or bulkWrite.
+{ acknowledged: true, deletedCount: 3 }
+perpustakaan>
+
+perpustakaan> db.koleksibuku.find()
+
+perpustakaan> db.koleksibuku.find()
+
+perpustakaan>
+
+perpustakaan> // hapus collections
+
+perpustakaan> show collections
+koleksibuku
+perpustakaan>
+
+perpustakaan> // Hapus collection
+
+perpustakaan> db.koleksibuku.drop()
+true
+perpustakaan>
+
+perpustakaan> show collections
+
+perpustakaan>
