@@ -1101,3 +1101,731 @@ perpustakaan>
 perpustakaan> show collections
 
 perpustakaan>
+
+peminjaman> // COMPARISON QUERY
+
+peminjaman> // $eq : =
+
+peminjaman> // namapeminjam = Ren
+
+peminjaman> db.pinjambuku.find({namapeminjam:{$eq:"Ren"}})
+[
+  {
+    _id: 2,
+    namapeminjam: 'Ren',
+    buku: 'Hashire, Melos!',
+    kode_buku: 'BK002',
+    tgl_pinjam: '17-01-2026',
+    tgl_kembali: '24-01-2026'
+  }
+]
+peminjaman>
+
+peminjaman> // $ne : !=
+
+peminjaman> // namapeminjam != Ren
+
+peminjaman> db.pinjambuku.find({namapeminjam:{$ne:"Ren"}})
+[
+  {
+    _id: 1,
+    namapeminjam: 'Yuna',
+    buku: 'Laskar Pelangi',
+    kode_buku: 'BK001',
+    tgl_pinjam: '05-01-2026',
+    tgl_kembali: '12-01-2026'
+  },
+  {
+    _id: 3,
+    namapeminjam: 'Riku',
+    buku: 'Kimi No Nawa',
+    kode_buku: 'BK003',
+    tgl_pinjam: '25-01-2026',
+    tgl_kembali: '01-02-2026'
+  },
+  {
+    _id: 4,
+    namapeminjam: 'Yuda',
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026',
+    namabuku: 'Laut Bercerita'
+  },
+  {
+    _id: 5,
+    namapeminjam: 'Rika',
+    buku: "Trash Of The Count's Family",
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026'
+  }
+]
+peminjaman>
+
+peminjaman> // $gt : >
+
+peminjaman> // kode_buku > BK003
+
+peminjaman> db.pinjambuku.find({kode_buku:{$gt:"BK003"}})
+[
+  {
+    _id: 4,
+    namapeminjam: 'Yuda',
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026',
+    namabuku: 'Laut Bercerita'
+  },
+  {
+    _id: 5,
+    namapeminjam: 'Rika',
+    buku: "Trash Of The Count's Family",
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026'
+  }
+]
+peminjaman> // $gtE : >=
+
+peminjaman> // kode_buku >= BK003
+
+peminjaman> db.pinjambuku.find({kode_buku:{$gte:"BK003"}})
+[
+  {
+    _id: 3,
+    namapeminjam: 'Riku',
+    buku: 'Kimi No Nawa',
+    kode_buku: 'BK003',
+    tgl_pinjam: '25-01-2026',
+    tgl_kembali: '01-02-2026'
+  },
+  {
+    _id: 4,
+    namapeminjam: 'Yuda',
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026',
+    namabuku: 'Laut Bercerita'
+  },
+  {
+    _id: 5,
+    namapeminjam: 'Rika',
+    buku: "Trash Of The Count's Family",
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026'
+  }
+]
+peminjaman> // $lt : <
+
+peminjaman> // kode_buku < BK003
+
+peminjaman> db.pinjambuku.find({kode_buku:{$lt:"BK003"}})
+[
+  {
+    _id: 1,
+    namapeminjam: 'Yuna',
+    buku: 'Laskar Pelangi',
+    kode_buku: 'BK001',
+    tgl_pinjam: '05-01-2026',
+    tgl_kembali: '12-01-2026'
+  },
+  {
+    _id: 2,
+    namapeminjam: 'Ren',
+    buku: 'Hashire, Melos!',
+    kode_buku: 'BK002',
+    tgl_pinjam: '17-01-2026',
+    tgl_kembali: '24-01-2026'
+  }
+]
+peminjaman>
+
+peminjaman> // $lte : <=
+
+peminjaman> // kode_buku <= BK003
+
+peminjaman> db.pinjambuku.find({kode_buku:{$lte:"BK003"}})
+[
+  {
+    _id: 1,
+    namapeminjam: 'Yuna',
+    buku: 'Laskar Pelangi',
+    kode_buku: 'BK001',
+    tgl_pinjam: '05-01-2026',
+    tgl_kembali: '12-01-2026'
+  },
+  {
+    _id: 2,
+    namapeminjam: 'Ren',
+    buku: 'Hashire, Melos!',
+    kode_buku: 'BK002',
+    tgl_pinjam: '17-01-2026',
+    tgl_kembali: '24-01-2026'
+  },
+  {
+    _id: 3,
+    namapeminjam: 'Riku',
+    buku: 'Kimi No Nawa',
+    kode_buku: 'BK003',
+    tgl_pinjam: '25-01-2026',
+    tgl_kembali: '01-02-2026'
+  }
+]
+peminjaman>
+
+peminjaman> // $in : array
+
+peminjaman> // kode_buku = BK001, BK002, BK003
+
+peminjaman> db.pinjambuku.find({kode_buku:{$in:[BK001, BK002, BK003]}})
+ReferenceError: BK001 is not defined
+peminjaman>
+
+peminjaman> // $in : array
+
+peminjaman> // kode_buku = BK001, BK002, BK003
+
+peminjaman> db.pinjambuku.find({kode_buku:{$in:["BK001", "BK002", "BK003"]}})
+[
+  {
+    _id: 1,
+    namapeminjam: 'Yuna',
+    buku: 'Laskar Pelangi',
+    kode_buku: 'BK001',
+    tgl_pinjam: '05-01-2026',
+    tgl_kembali: '12-01-2026'
+  },
+  {
+    _id: 2,
+    namapeminjam: 'Ren',
+    buku: 'Hashire, Melos!',
+    kode_buku: 'BK002',
+    tgl_pinjam: '17-01-2026',
+    tgl_kembali: '24-01-2026'
+  },
+  {
+    _id: 3,
+    namapeminjam: 'Riku',
+    buku: 'Kimi No Nawa',
+    kode_buku: 'BK003',
+    tgl_pinjam: '25-01-2026',
+    tgl_kembali: '01-02-2026'
+  }
+]
+peminjaman>
+
+peminjaman> // $nin : !=array
+
+peminjaman> // kode_buku != BK001, BK002, BK003
+
+peminjaman> db.pinjambuku.find({kode_buku:{$nin:["BK001", "BK002", "BK003"]}})
+[
+  {
+    _id: 4,
+    namapeminjam: 'Yuda',
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026',
+    namabuku: 'Laut Bercerita'
+  },
+  {
+    _id: 5,
+    namapeminjam: 'Rika',
+    buku: "Trash Of The Count's Family",
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026'
+  }
+]
+peminjaman>
+
+peminjaman> // LOGICAL QUERY
+
+peminjaman> // $and : semua value = true
+
+peminjaman> // namapeminjam = Yuna, kode_buku= BK001
+
+peminjaman> db.pinjambuku.find({$and:[namapemin})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:35)
+
+> 1 | db.pinjambuku.find({$and:[namapemin})
+    |                                    ^
+  2 |
+
+peminjaman> // LOGICAL QUERY
+
+peminjaman> // $and : semua value = true
+
+peminjaman> // namapeminjam = Yuna, kode_buku= BK001
+
+peminjaman> db.pinjambuku.find({$and:[{namapeminjam:"Yuna"},{kode_buku: 'BK001'}]})
+[
+  {
+    _id: 1,
+    namapeminjam: 'Yuna',
+    buku: 'Laskar Pelangi',
+    kode_buku: 'BK001',
+    tgl_pinjam: '05-01-2026',
+    tgl_kembali: '12-01-2026'
+  }
+]
+peminjaman>
+
+peminjaman> db.pinjambuku.find({$and:[{namapeminjam:"Yuna"},{kode_buku: 'BK002'}]})
+
+peminjaman>
+
+peminjaman> //$or : salah satu = true
+
+peminjaman> //nama= Yuna, buku= laskar pelangi
+
+peminjaman> db.pinjambuku.find({$or:[{namapeminjam: "Yuna"}, {buku:"Laskar Pelangi"}]})
+[
+  {
+    _id: 1,
+    namapeminjam: 'Yuna',
+    buku: 'Laskar Pelangi',
+    kode_buku: 'BK001',
+    tgl_pinjam: '05-01-2026',
+    tgl_kembali: '12-01-2026'
+  }
+]
+peminjaman>
+
+peminjaman> //$nor : >< or
+
+peminjaman> //namapeminjam= Ren, kode_buku= BK002
+
+peminjaman> db.pinjambuku.find({$nor:[{namapeminjam:"Ren"}, {kode_buku: "BK002"}]})
+[
+  {
+    _id: 1,
+    namapeminjam: 'Yuna',
+    buku: 'Laskar Pelangi',
+    kode_buku: 'BK001',
+    tgl_pinjam: '05-01-2026',
+    tgl_kembali: '12-01-2026'
+  },
+  {
+    _id: 3,
+    namapeminjam: 'Riku',
+    buku: 'Kimi No Nawa',
+    kode_buku: 'BK003',
+    tgl_pinjam: '25-01-2026',
+    tgl_kembali: '01-02-2026'
+  },
+  {
+    _id: 4,
+    namapeminjam: 'Yuda',
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026',
+    namabuku: 'Laut Bercerita'
+  },
+  {
+    _id: 5,
+    namapeminjam: 'Rika',
+    buku: "Trash Of The Count's Family",
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026'
+  }
+]
+peminjaman>
+
+peminjaman> //$not : semua value = false
+
+peminjaman> // kode_buku !=> BK002
+
+peminjaman> db.pinjambuku.find({$not:[{namapeminjam:"Ren"}, {kode_buku: "BK002"}]})
+MongoServerError[BadValue]: unknown top level operator: $not. If you are trying to negate an entire expression, use $nor.
+peminjaman>
+
+peminjaman> //$not : semua value = false
+
+peminjaman> // kode_buku !=> BK002
+
+peminjaman> db.pinjambuku.find({kode_buku:{$not:{$gte:"BK002"}}})
+[
+  {
+    _id: 1,
+    namapeminjam: 'Yuna',
+    buku: 'Laskar Pelangi',
+    kode_buku: 'BK001',
+    tgl_pinjam: '05-01-2026',
+    tgl_kembali: '12-01-2026'
+  }
+]
+peminjaman>
+
+peminjaman> // BULK WRITE
+
+peminjaman> db.pinjambuku.find()
+[
+  {
+    _id: 1,
+    namapeminjam: 'Yuna',
+    buku: 'Laskar Pelangi',
+    kode_buku: 'BK001',
+    tgl_pinjam: '05-01-2026',
+    tgl_kembali: '12-01-2026'
+  },
+  {
+    _id: 2,
+    namapeminjam: 'Ren',
+    buku: 'Hashire, Melos!',
+    kode_buku: 'BK002',
+    tgl_pinjam: '17-01-2026',
+    tgl_kembali: '24-01-2026'
+  },
+  {
+    _id: 3,
+    namapeminjam: 'Riku',
+    buku: 'Kimi No Nawa',
+    kode_buku: 'BK003',
+    tgl_pinjam: '25-01-2026',
+    tgl_kembali: '01-02-2026'
+  },
+  {
+    _id: 4,
+    namapeminjam: 'Yuda',
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026',
+    namabuku: 'Laut Bercerita'
+  },
+  {
+    _id: 5,
+    namapeminjam: 'Rika',
+    buku: "Trash Of The Count's Family",
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026'
+  }
+]
+peminjaman> //insert = id:6, nama:Vara, kode_buku: BK006, namabuku:alpha girl
+
+peminjaman> //update = _id: 4 --> kode_buku:BK004
+
+peminjaman> db.pinjambuku.bulkWrite([
+| {insertOne:{document:{_id:6, nama:"Vara", kode_buku:"BK006", namabuku:"Alpha Girl"}}},
+| {updateOne:{filter:{_id: 4},update:{&set:{kode_buku:"BK004}}}}])
+Uncaught:
+SyntaxError: Unexpected token (3:36)
+
+  1 | db.pinjambuku.bulkWrite([
+  2 | {insertOne:{document:{_id:6, nama:"Vara", kode_buku:"BK006", namabuku:"Alpha Girl"}}},
+> 3 | {updateOne:{filter:{_id: 4},update:{&set:{kode_buku:"BK004}}}}])
+    |                                     ^
+  4 |
+
+peminjaman> db.pinjambuku.bulkWrite([ {insertOne:{document:{_id:6, nama:"Vara", kode_buku:"BK006", namabuku:"Alpha Girl"}}}, {updateOne:{filter:{_id: 4},update:{&set:{kode_buku:"BK004"}}}}])
+Uncaught:
+SyntaxError: Unexpected token (1:149)
+
+> 1 | db.pinjambuku.bulkWrite([ {insertOne:{document:{_id:6, nama:"Vara", kode_buku:"BK006", namabuku:"Alpha Girl"}}}, {updateOne:{filter:{_id: 4},update:{&set:{kode_buku:"BK004"}}}}])
+    |                                                                                                                                                      ^
+  2 |
+
+peminjaman> db.pinjambuku.bulkWrite([ {insertOne:{document:{_id:6, nama:"Vara", kode_buku:"BK006", namabuku:"Alpha Girl"}}}, {updateOne:{filter:{_id: 4},update:{$set:{kode_buku:"BK004"}}}}])
+{
+  acknowledged: true,
+  insertedCount: 1,
+  insertedIds: { '0': 6 },
+  matchedCount: 1,
+  modifiedCount: 1,
+  deletedCount: 0,
+  upsertedCount: 0,
+  upsertedIds: {}
+}
+peminjaman> db,pinjambuku.find()
+ReferenceError: pinjambuku is not defined
+peminjaman> db.pinjambuku.find()
+[
+  {
+    _id: 1,
+    namapeminjam: 'Yuna',
+    buku: 'Laskar Pelangi',
+    kode_buku: 'BK001',
+    tgl_pinjam: '05-01-2026',
+    tgl_kembali: '12-01-2026'
+  },
+  {
+    _id: 2,
+    namapeminjam: 'Ren',
+    buku: 'Hashire, Melos!',
+    kode_buku: 'BK002',
+    tgl_pinjam: '17-01-2026',
+    tgl_kembali: '24-01-2026'
+  },
+  {
+    _id: 3,
+    namapeminjam: 'Riku',
+    buku: 'Kimi No Nawa',
+    kode_buku: 'BK003',
+    tgl_pinjam: '25-01-2026',
+    tgl_kembali: '01-02-2026'
+  },
+  {
+    _id: 4,
+    namapeminjam: 'Yuda',
+    kode_buku: 'BK004',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026',
+    namabuku: 'Laut Bercerita'
+  },
+  {
+    _id: 5,
+    namapeminjam: 'Rika',
+    buku: "Trash Of The Count's Family",
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026'
+  },
+  { _id: 6, nama: 'Vara', kode_buku: 'BK006', namabuku: 'Alpha Girl' }
+]
+peminjaman> //delete = nama:Vara
+
+peminjaman> //update = _id:1 --> buku:Laskar Pelangi
+
+peminjaman> db.pinjambuku,bulkWrite([
+| {deleteOne:{filter:{nama:"Vara"}}},
+| {updateOne:{filter:{_id:1},update:{$set:{buku:"Seni Merayu Tuhan"}}}}])
+ReferenceError: bulkWrite is not defined
+peminjaman> db.pinjambuku.bulkWrite([ { deleteOne: { filter: { nama: "Vara" } } }, { updateOne: { filter: { _id: 1 }, update: { $set: { buku: "Seni Merayu Tuhan" } } } }])
+{
+  acknowledged: true,
+  insertedCount: 0,
+  insertedIds: {},
+  matchedCount: 1,
+  modifiedCount: 1,
+  deletedCount: 1,
+  upsertedCount: 0,
+  upsertedIds: {}
+}
+peminjaman> db.pinjambuku.find()
+[
+  {
+    _id: 1,
+    namapeminjam: 'Yuna',
+    buku: 'Seni Merayu Tuhan',
+    kode_buku: 'BK001',
+    tgl_pinjam: '05-01-2026',
+    tgl_kembali: '12-01-2026'
+  },
+  {
+    _id: 2,
+    namapeminjam: 'Ren',
+    buku: 'Hashire, Melos!',
+    kode_buku: 'BK002',
+    tgl_pinjam: '17-01-2026',
+    tgl_kembali: '24-01-2026'
+  },
+  {
+    _id: 3,
+    namapeminjam: 'Riku',
+    buku: 'Kimi No Nawa',
+    kode_buku: 'BK003',
+    tgl_pinjam: '25-01-2026',
+    tgl_kembali: '01-02-2026'
+  },
+  {
+    _id: 4,
+    namapeminjam: 'Yuda',
+    kode_buku: 'BK004',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026',
+    namabuku: 'Laut Bercerita'
+  },
+  {
+    _id: 5,
+    namapeminjam: 'Rika',
+    buku: "Trash Of The Count's Family",
+    kode_buku: 'BK005',
+    tgl_pinjam: '12-02-2026',
+    tgl_kembali: '19-02-2026'
+  }
+]
+peminjaman>
+
+peminjaman> // AGGREATION
+
+peminjaman> db.koleksibuku.aggregate([
+| {
+|   $group:{
+|     _id:"$kategori",
+|     jumlah_buku:{$sum:1}
+|   }
+| }
+| ])
+
+peminjaman>
+
+peminjaman> db.createCollection("koleksibuku", {
+|  validator: {
+|   $jsonSchema: {
+|    bsonType: "object",
+|    required: ["judul","penulis","kategori","tahun_terbit","stok"],
+|    properties: {
+|     judul: {
+|      bsonType: "string"
+|     },
+|     penulis: {
+|      bsonType: "string"
+|     },
+|     kategori: {
+|      bsonType: "string"
+|     },
+|     tahun_terbit: {
+|      bsonType: "int"
+|     },
+|     stok: {
+|      bsonType: "int"
+|     }
+|    }
+|   }
+|  }
+| })
+{ ok: 1 }
+peminjaman>
+
+peminjaman>
+
+peminjaman> // AGGREATION
+
+peminjaman> use perpustakaan
+switched to db perpustakaan
+perpustakaan>
+
+perpustakaan> // buat collection
+
+perpustakaan> db.createCollection("daftarpinjam")
+{ ok: 1 }
+perpustakaan>
+
+perpustakaan> // buat document
+
+perpustakaan> db.daftarpinjam.insertMany([
+|     {_id:1, nama:"Alya", judul_buku:"Laskar Pelangi", kategori:"Novel", status:"Dipinjam"},
+|     {_id:2, nama:"Bima", judul_buku:"Bumi", kategori:"Novel", status:"Dikembalikan"},
+|     {_id:3, nama:"Citra", judul_buku:"Algoritma Dasar", kategori:"Teknologi", status:"Dipinjam"},
+|     {_id:4, nama:"Dinda", judul_buku:"Pemrograman Web", kategori:"Teknologi", status:"Dipinjam"},
+|     {_id:5, nama:"Eka", judul_buku:"Sejarah Indonesia", kategori:"Sejarah", status:"Dikembalikan"},
+|     {_id:6, nama:"Farhan", judul_buku:"Laskar Pelangi", kategori:"Novel", status:"Dipinjam"},
+|     {_id:7, nama:"Gita", judul_buku:"Basis Data", kategori:"Teknologi", status:"Dikembalikan"},
+|     {_id:8, nama:"Hani", judul_buku:"Bumi", kategori:"Novel", status:"Dipinjam"},
+|     {_id:9, nama:"Indra", judul_buku:"Sejarah Indonesia", kategori:"Sejarah", status:"Dipinjam"},
+|     {_id:10, nama:"Jihan", judul_buku:"Pemrograman Web", kategori:"Teknologi", status:"Dikembalikan"}
+| ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': 1,
+    '1': 2,
+    '2': 3,
+    '3': 4,
+    '4': 5,
+    '5': 6,
+    '6': 7,
+    '7': 8,
+    '8': 9,
+    '9': 10
+  }
+}
+perpustakaan>
+
+perpustakaan> // cek document
+
+perpustakaan> db.daftarpinjam.find()
+[
+  {
+    _id: 1,
+    nama: 'Alya',
+    judul_buku: 'Laskar Pelangi',
+    kategori: 'Novel',
+    status: 'Dipinjam'
+  },
+  {
+    _id: 2,
+    nama: 'Bima',
+    judul_buku: 'Bumi',
+    kategori: 'Novel',
+    status: 'Dikembalikan'
+  },
+  {
+    _id: 3,
+    nama: 'Citra',
+    judul_buku: 'Algoritma Dasar',
+    kategori: 'Teknologi',
+    status: 'Dipinjam'
+  },
+  {
+    _id: 4,
+    nama: 'Dinda',
+    judul_buku: 'Pemrograman Web',
+    kategori: 'Teknologi',
+    status: 'Dipinjam'
+  },
+  {
+    _id: 5,
+    nama: 'Eka',
+    judul_buku: 'Sejarah Indonesia',
+    kategori: 'Sejarah',
+    status: 'Dikembalikan'
+  },
+  {
+    _id: 6,
+    nama: 'Farhan',
+    judul_buku: 'Laskar Pelangi',
+    kategori: 'Novel',
+    status: 'Dipinjam'
+  },
+  {
+    _id: 7,
+    nama: 'Gita',
+    judul_buku: 'Basis Data',
+    kategori: 'Teknologi',
+    status: 'Dikembalikan'
+  },
+  {
+    _id: 8,
+    nama: 'Hani',
+    judul_buku: 'Bumi',
+    kategori: 'Novel',
+    status: 'Dipinjam'
+  },
+  {
+    _id: 9,
+    nama: 'Indra',
+    judul_buku: 'Sejarah Indonesia',
+    kategori: 'Sejarah',
+    status: 'Dipinjam'
+  },
+  {
+    _id: 10,
+    nama: 'Jihan',
+    judul_buku: 'Pemrograman Web',
+    kategori: 'Teknologi',
+    status: 'Dikembalikan'
+  }
+]
+perpustakaan>
+
+perpustakaan> // jml peminjam tiap kategori
+
+perpustakaan> //cara biasa
+
+perpustakaan> db.daftarpinjam.count({kategori:"Novel"})
+DeprecationWarning: Collection.count() is deprecated. Use countDocuments or estimatedDocumentCount.
+4
+perpustakaan> //cara aggregation
+
+perpustakaan> db.daftarpinjam.aggregate([{$group:{_id:"$kategori", Peserta:{$sum:1}}}])
+[
+  { _id: 'Sejarah', Peserta: 2 },
+  { _id: 'Novel', Peserta: 4 },
+  { _id: 'Teknologi', Peserta: 4 }
+]
+perpustakaan>
