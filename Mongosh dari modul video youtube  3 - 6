@@ -500,16 +500,8 @@ peminjaman> db.pinjambuku.updateOne(
 }
 peminjaman>
 
-peminjaman> db.pinjambuku.find()
+peminjaman>db.peminjaman.find({_id: 2})
 [
-  {
-    _id: 1,
-    namapeminjam: 'Yuna',
-    buku: 'Laskar Pelangi',
-    kode_buku: 'BK001',
-    tgl_pinjam: '05-01-2026',
-    tgl_kembali: '12-01-2026'
-  },
   {
     _id: 2,
     namapeminjam: 'Ren',
@@ -517,30 +509,6 @@ peminjaman> db.pinjambuku.find()
     kode_buku: 'BK002',
     tgl_pinjam: '17-01-2026',
     tgl_kembali: '24-01-2026'
-  },
-  {
-    _id: 3,
-    namapeminjam: 'Riku',
-    buku: 'Kimi No Nawa',
-    kode_buku: 'BK003',
-    tgl_pinjam: '25-01-2026',
-    tgl_kembali: '01-02-2026'
-  },
-  {
-    _id: 4,
-    namapeminjam: 'Hana',
-    buku: 'Laut Bercerita',
-    kode_buku: 'BK004',
-    tgl_pinjam: '03-02-2026',
-    tgl_kembali: '10-02-2026'
-  },
-  {
-    _id: 5,
-    namapeminjam: 'Yuki',
-    buku: "Trash Of The Count's Family",
-    kode_buku: 'BK005',
-    tgl_pinjam: '12-02-2026',
-    tgl_kembali: '19-02-2026'
   }
 ]
 peminjaman>
@@ -560,32 +528,10 @@ peminjaman> db.pinjambuku.updateMany(
   upsertedCount: 0
 }
 peminjaman>
-peminjaman> db.pinjambuku.find()
+peminjaman> db.peminjaman.find({
+  _id: { $in: [4, 5] }
+})
 [
-  {
-    _id: 1,
-    namapeminjam: 'Yuna',
-    buku: 'Laskar Pelangi',
-    kode_buku: 'BK001',
-    tgl_pinjam: '05-01-2026',
-    tgl_kembali: '12-01-2026'
-  },
-  {
-    _id: 2,
-    namapeminjam: 'Ren',
-    buku: 'Hashire, Melos!',
-    kode_buku: 'BK002',
-    tgl_pinjam: '17-01-2026',
-    tgl_kembali: '24-01-2026'
-  },
-  {
-    _id: 3,
-    namapeminjam: 'Riku',
-    buku: 'Kimi No Nawa',
-    kode_buku: 'BK003',
-    tgl_pinjam: '25-01-2026',
-    tgl_kembali: '01-02-2026'
-  },
   {
     _id: 4,
     namapeminjam: 'Rika',
@@ -619,45 +565,13 @@ peminjaman> db.pinjambuku.replaceOne(
 }
 peminjaman>
 
-peminjaman> db.pinjambuku.find()
+peminjaman> db.pinjambuku.find({_id: 4})
 [
-  {
-    _id: 1,
-    namapeminjam: 'Yuna',
-    buku: 'Laskar Pelangi',
-    kode_buku: 'BK001',
-    tgl_pinjam: '05-01-2026',
-    tgl_kembali: '12-01-2026'
-  },
-  {
-    _id: 2,
-    namapeminjam: 'Ren',
-    buku: 'Hashire, Melos!',
-    kode_buku: 'BK002',
-    tgl_pinjam: '17-01-2026',
-    tgl_kembali: '24-01-2026'
-  },
-  {
-    _id: 3,
-    namapeminjam: 'Riku',
-    buku: 'Kimi No Nawa',
-    kode_buku: 'BK003',
-    tgl_pinjam: '25-01-2026',
-    tgl_kembali: '01-02-2026'
-  },
   {
     _id: 4,
     namapeminjam: 'Yuda',
     buku: 'Laut Bercerita',
     pengarang: 'Leila S. Chudori',
-    kode_buku: 'BK005',
-    tgl_pinjam: '12-02-2026',
-    tgl_kembali: '19-02-2026'
-  },
-  {
-    _id: 5,
-    namapeminjam: 'Rika',
-    buku: "Trash Of The Count's Family",
     kode_buku: 'BK005',
     tgl_pinjam: '12-02-2026',
     tgl_kembali: '19-02-2026'
@@ -679,44 +593,12 @@ peminjaman> db.pinjambuku.updateOne(
 }
 peminjaman>
 
-peminjaman> db.pinjambuku.find()
+peminjaman> db.pinjambuku.find({_id: 4})
 [
-  {
-    _id: 1,
-    namapeminjam: 'Yuna',
-    buku: 'Laskar Pelangi',
-    kode_buku: 'BK001',
-    tgl_pinjam: '05-01-2026',
-    tgl_kembali: '12-01-2026'
-  },
-  {
-    _id: 2,
-    namapeminjam: 'Ren',
-    buku: 'Hashire, Melos!',
-    kode_buku: 'BK002',
-    tgl_pinjam: '17-01-2026',
-    tgl_kembali: '24-01-2026'
-  },
-  {
-    _id: 3,
-    namapeminjam: 'Riku',
-    buku: 'Kimi No Nawa',
-    kode_buku: 'BK003',
-    tgl_pinjam: '25-01-2026',
-    tgl_kembali: '01-02-2026'
-  },
   {
     _id: 4,
     namapeminjam: 'Yuda',
     buku: 'Laut Bercerita',
-    kode_buku: 'BK005',
-    tgl_pinjam: '12-02-2026',
-    tgl_kembali: '19-02-2026'
-  },
-  {
-    _id: 5,
-    namapeminjam: 'Rika',
-    buku: "Trash Of The Count's Family",
     kode_buku: 'BK005',
     tgl_pinjam: '12-02-2026',
     tgl_kembali: '19-02-2026'
@@ -739,32 +621,8 @@ peminjaman> db.pinjambuku.updateOne(
 }
 peminjaman>
 
-peminjaman> db.pinjambuku.find()
+peminjaman> db.pinjambuku.find({_id: 4})
 [
-  {
-    _id: 1,
-    namapeminjam: 'Yuna',
-    buku: 'Laskar Pelangi',
-    kode_buku: 'BK001',
-    tgl_pinjam: '05-01-2026',
-    tgl_kembali: '12-01-2026'
-  },
-  {
-    _id: 2,
-    namapeminjam: 'Ren',
-    buku: 'Hashire, Melos!',
-    kode_buku: 'BK002',
-    tgl_pinjam: '17-01-2026',
-    tgl_kembali: '24-01-2026'
-  },
-  {
-    _id: 3,
-    namapeminjam: 'Riku',
-    buku: 'Kimi No Nawa',
-    kode_buku: 'BK003',
-    tgl_pinjam: '25-01-2026',
-    tgl_kembali: '01-02-2026'
-  },
   {
     _id: 4,
     namapeminjam: 'Yuda',
@@ -772,14 +630,6 @@ peminjaman> db.pinjambuku.find()
     tgl_pinjam: '12-02-2026',
     tgl_kembali: '19-02-2026',
     namabuku: 'Laut Bercerita'
-  },
-  {
-    _id: 5,
-    namapeminjam: 'Rika',
-    buku: "Trash Of The Count's Family",
-    kode_buku: 'BK005',
-    tgl_pinjam: '12-02-2026',
-    tgl_kembali: '19-02-2026'
   }
 ]
 
