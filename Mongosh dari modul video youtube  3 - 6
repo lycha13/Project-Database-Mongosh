@@ -635,10 +635,10 @@ peminjaman> db.pinjambuku.find({_id: 4})
 
 peminjaman> // DELETE DOCUMENT
 
-peminjaman> db.coba.find()
-
 peminjaman> use perpustakaan
-|
+
+peminjaman>
+
 | db.createCollection("koleksibuku")
 switched to db perpustakaan
 perpustakaan> db.createCollection("koleksibuku")
@@ -768,124 +768,12 @@ perpustakaan> db.koleksibuku.find()
 ]
 perpustakaan>
 
-perpustakaan> // DELETE DOCUMENT
-
-perpustakaan> db.koleksibuku.find()
-[
-  {
-    _id: 1,
-    judul: 'Bumi',
-    penulis: 'Tere Liye',
-    kategori: 'Novel',
-    tahun_terbit: 2014,
-    stok: 8
-  },
-  {
-    _id: 2,
-    judul: 'Laut Bercerita',
-    penulis: 'Leila S. Chudori',
-    kategori: 'Novel',
-    tahun_terbit: 2017,
-    stok: 5
-  },
-  {
-    _id: 3,
-    judul: 'Atomic Habits',
-    penulis: 'James Clear',
-    kategori: 'Pengembangan Diri',
-    tahun_terbit: 2018,
-    stok: 7
-  },
-  {
-    _id: 4,
-    judul: 'Filosofi Teras',
-    penulis: 'Henry Manampiring',
-    kategori: 'Psikologi',
-    tahun_terbit: 2018,
-    stok: 4
-  },
-  {
-    _id: 5,
-    judul: 'Negeri 5 Menara',
-    penulis: 'Ahmad Fuadi',
-    kategori: 'Novel',
-    tahun_terbit: 2009,
-    stok: 6
-  },
-  {
-    _id: 6,
-    judul: 'Rich Dad Poor Dad',
-    penulis: 'Robert Kiyosaki',
-    kategori: 'Keuangan',
-    tahun_terbit: 1997,
-    stok: 3
-  },
-  {
-    _id: 7,
-    judul: 'The Psychology of Money',
-    penulis: 'Morgan Housel',
-    kategori: 'Keuangan',
-    tahun_terbit: 2020,
-    stok: 5
-  }
-]
-perpustakaan>
-
 perpustakaan> // delete one
 
 perpustakaan> db.koleksibuku.deleteOne({judul:"The Psychology of Money"})
 { acknowledged: true, deletedCount: 1 }
-perpustakaan> db.koleksibuku.find()
-[
-  {
-    _id: 1,
-    judul: 'Bumi',
-    penulis: 'Tere Liye',
-    kategori: 'Novel',
-    tahun_terbit: 2014,
-    stok: 8
-  },
-  {
-    _id: 2,
-    judul: 'Laut Bercerita',
-    penulis: 'Leila S. Chudori',
-    kategori: 'Novel',
-    tahun_terbit: 2017,
-    stok: 5
-  },
-  {
-    _id: 3,
-    judul: 'Atomic Habits',
-    penulis: 'James Clear',
-    kategori: 'Pengembangan Diri',
-    tahun_terbit: 2018,
-    stok: 7
-  },
-  {
-    _id: 4,
-    judul: 'Filosofi Teras',
-    penulis: 'Henry Manampiring',
-    kategori: 'Psikologi',
-    tahun_terbit: 2018,
-    stok: 4
-  },
-  {
-    _id: 5,
-    judul: 'Negeri 5 Menara',
-    penulis: 'Ahmad Fuadi',
-    kategori: 'Novel',
-    tahun_terbit: 2009,
-    stok: 6
-  },
-  {
-    _id: 6,
-    judul: 'Rich Dad Poor Dad',
-    penulis: 'Robert Kiyosaki',
-    kategori: 'Keuangan',
-    tahun_terbit: 1997,
-    stok: 3
-  }
-]
+perpustakaan> db.koleksibuku.find({_id:7})
+
 perpustakaan>
 
 perpustakaan> // delete Many
@@ -932,14 +820,6 @@ perpustakaan>
 
 perpustakaan> db.koleksibuku.find()
 
-perpustakaan> db.koleksibuku.find()
-
-perpustakaan>
-
-perpustakaan> // hapus collections
-
-perpustakaan> show collections
-koleksibuku
 perpustakaan>
 
 perpustakaan> // Hapus collection
@@ -1128,14 +1008,6 @@ peminjaman> // $in : array
 
 peminjaman> // kode_buku = BK001, BK002, BK003
 
-peminjaman> db.pinjambuku.find({kode_buku:{$in:[BK001, BK002, BK003]}})
-ReferenceError: BK001 is not defined
-peminjaman>
-
-peminjaman> // $in : array
-
-peminjaman> // kode_buku = BK001, BK002, BK003
-
 peminjaman> db.pinjambuku.find({kode_buku:{$in:["BK001", "BK002", "BK003"]}})
 [
   {
@@ -1189,20 +1061,6 @@ peminjaman> db.pinjambuku.find({kode_buku:{$nin:["BK001", "BK002", "BK003"]}})
   }
 ]
 peminjaman>
-
-peminjaman> // LOGICAL QUERY
-
-peminjaman> // $and : semua value = true
-
-peminjaman> // namapeminjam = Yuna, kode_buku= BK001
-
-peminjaman> db.pinjambuku.find({$and:[namapemin})
-Uncaught:
-SyntaxError: Unexpected token, expected "," (1:35)
-
-> 1 | db.pinjambuku.find({$and:[namapemin})
-    |                                    ^
-  2 |
 
 peminjaman> // LOGICAL QUERY
 
@@ -1289,14 +1147,6 @@ peminjaman> //$not : semua value = false
 
 peminjaman> // kode_buku !=> BK002
 
-peminjaman> db.pinjambuku.find({$not:[{namapeminjam:"Ren"}, {kode_buku: "BK002"}]})
-MongoServerError[BadValue]: unknown top level operator: $not. If you are trying to negate an entire expression, use $nor.
-peminjaman>
-
-peminjaman> //$not : semua value = false
-
-peminjaman> // kode_buku !=> BK002
-
 peminjaman> db.pinjambuku.find({kode_buku:{$not:{$gte:"BK002"}}})
 [
   {
@@ -1312,72 +1162,9 @@ peminjaman>
 
 peminjaman> // BULK WRITE
 
-peminjaman> db.pinjambuku.find()
-[
-  {
-    _id: 1,
-    namapeminjam: 'Yuna',
-    buku: 'Laskar Pelangi',
-    kode_buku: 'BK001',
-    tgl_pinjam: '05-01-2026',
-    tgl_kembali: '12-01-2026'
-  },
-  {
-    _id: 2,
-    namapeminjam: 'Ren',
-    buku: 'Hashire, Melos!',
-    kode_buku: 'BK002',
-    tgl_pinjam: '17-01-2026',
-    tgl_kembali: '24-01-2026'
-  },
-  {
-    _id: 3,
-    namapeminjam: 'Riku',
-    buku: 'Kimi No Nawa',
-    kode_buku: 'BK003',
-    tgl_pinjam: '25-01-2026',
-    tgl_kembali: '01-02-2026'
-  },
-  {
-    _id: 4,
-    namapeminjam: 'Yuda',
-    kode_buku: 'BK005',
-    tgl_pinjam: '12-02-2026',
-    tgl_kembali: '19-02-2026',
-    namabuku: 'Laut Bercerita'
-  },
-  {
-    _id: 5,
-    namapeminjam: 'Rika',
-    buku: "Trash Of The Count's Family",
-    kode_buku: 'BK005',
-    tgl_pinjam: '12-02-2026',
-    tgl_kembali: '19-02-2026'
-  }
-]
 peminjaman> //insert = id:6, nama:Vara, kode_buku: BK006, namabuku:alpha girl
 
 peminjaman> //update = _id: 4 --> kode_buku:BK004
-
-peminjaman> db.pinjambuku.bulkWrite([
-| {insertOne:{document:{_id:6, nama:"Vara", kode_buku:"BK006", namabuku:"Alpha Girl"}}},
-| {updateOne:{filter:{_id: 4},update:{&set:{kode_buku:"BK004}}}}])
-Uncaught:
-SyntaxError: Unexpected token (3:36)
-
-  1 | db.pinjambuku.bulkWrite([
-  2 | {insertOne:{document:{_id:6, nama:"Vara", kode_buku:"BK006", namabuku:"Alpha Girl"}}},
-> 3 | {updateOne:{filter:{_id: 4},update:{&set:{kode_buku:"BK004}}}}])
-    |                                     ^
-  4 |
-
-peminjaman> db.pinjambuku.bulkWrite([ {insertOne:{document:{_id:6, nama:"Vara", kode_buku:"BK006", namabuku:"Alpha Girl"}}}, {updateOne:{filter:{_id: 4},update:{&set:{kode_buku:"BK004"}}}}])
-Uncaught:
-SyntaxError: Unexpected token (1:149)
-
-> 1 | db.pinjambuku.bulkWrite([ {insertOne:{document:{_id:6, nama:"Vara", kode_buku:"BK006", namabuku:"Alpha Girl"}}}, {updateOne:{filter:{_id: 4},update:{&set:{kode_buku:"BK004"}}}}])
-    |                                                                                                                                                      ^
-  2 |
 
 peminjaman> db.pinjambuku.bulkWrite([ {insertOne:{document:{_id:6, nama:"Vara", kode_buku:"BK006", namabuku:"Alpha Girl"}}}, {updateOne:{filter:{_id: 4},update:{$set:{kode_buku:"BK004"}}}}])
 {
@@ -1390,60 +1177,17 @@ peminjaman> db.pinjambuku.bulkWrite([ {insertOne:{document:{_id:6, nama:"Vara", 
   upsertedCount: 0,
   upsertedIds: {}
 }
-peminjaman> db,pinjambuku.find()
-ReferenceError: pinjambuku is not defined
-peminjaman> db.pinjambuku.find()
+peminjaman> 
+
+peminjaman> db.pinjambuku.find({_id:6})
 [
-  {
-    _id: 1,
-    namapeminjam: 'Yuna',
-    buku: 'Laskar Pelangi',
-    kode_buku: 'BK001',
-    tgl_pinjam: '05-01-2026',
-    tgl_kembali: '12-01-2026'
-  },
-  {
-    _id: 2,
-    namapeminjam: 'Ren',
-    buku: 'Hashire, Melos!',
-    kode_buku: 'BK002',
-    tgl_pinjam: '17-01-2026',
-    tgl_kembali: '24-01-2026'
-  },
-  {
-    _id: 3,
-    namapeminjam: 'Riku',
-    buku: 'Kimi No Nawa',
-    kode_buku: 'BK003',
-    tgl_pinjam: '25-01-2026',
-    tgl_kembali: '01-02-2026'
-  },
-  {
-    _id: 4,
-    namapeminjam: 'Yuda',
-    kode_buku: 'BK004',
-    tgl_pinjam: '12-02-2026',
-    tgl_kembali: '19-02-2026',
-    namabuku: 'Laut Bercerita'
-  },
-  {
-    _id: 5,
-    namapeminjam: 'Rika',
-    buku: "Trash Of The Count's Family",
-    kode_buku: 'BK005',
-    tgl_pinjam: '12-02-2026',
-    tgl_kembali: '19-02-2026'
-  },
   { _id: 6, nama: 'Vara', kode_buku: 'BK006', namabuku: 'Alpha Girl' }
 ]
+
 peminjaman> //delete = nama:Vara
 
 peminjaman> //update = _id:1 --> buku:Laskar Pelangi
 
-peminjaman> db.pinjambuku,bulkWrite([
-| {deleteOne:{filter:{nama:"Vara"}}},
-| {updateOne:{filter:{_id:1},update:{$set:{buku:"Seni Merayu Tuhan"}}}}])
-ReferenceError: bulkWrite is not defined
 peminjaman> db.pinjambuku.bulkWrite([ { deleteOne: { filter: { nama: "Vara" } } }, { updateOne: { filter: { _id: 1 }, update: { $set: { buku: "Seni Merayu Tuhan" } } } }])
 {
   acknowledged: true,
@@ -1455,91 +1199,7 @@ peminjaman> db.pinjambuku.bulkWrite([ { deleteOne: { filter: { nama: "Vara" } } 
   upsertedCount: 0,
   upsertedIds: {}
 }
-peminjaman> db.pinjambuku.find()
-[
-  {
-    _id: 1,
-    namapeminjam: 'Yuna',
-    buku: 'Seni Merayu Tuhan',
-    kode_buku: 'BK001',
-    tgl_pinjam: '05-01-2026',
-    tgl_kembali: '12-01-2026'
-  },
-  {
-    _id: 2,
-    namapeminjam: 'Ren',
-    buku: 'Hashire, Melos!',
-    kode_buku: 'BK002',
-    tgl_pinjam: '17-01-2026',
-    tgl_kembali: '24-01-2026'
-  },
-  {
-    _id: 3,
-    namapeminjam: 'Riku',
-    buku: 'Kimi No Nawa',
-    kode_buku: 'BK003',
-    tgl_pinjam: '25-01-2026',
-    tgl_kembali: '01-02-2026'
-  },
-  {
-    _id: 4,
-    namapeminjam: 'Yuda',
-    kode_buku: 'BK004',
-    tgl_pinjam: '12-02-2026',
-    tgl_kembali: '19-02-2026',
-    namabuku: 'Laut Bercerita'
-  },
-  {
-    _id: 5,
-    namapeminjam: 'Rika',
-    buku: "Trash Of The Count's Family",
-    kode_buku: 'BK005',
-    tgl_pinjam: '12-02-2026',
-    tgl_kembali: '19-02-2026'
-  }
-]
-peminjaman>
-
-peminjaman> // AGGREATION
-
-peminjaman> db.koleksibuku.aggregate([
-| {
-|   $group:{
-|     _id:"$kategori",
-|     jumlah_buku:{$sum:1}
-|   }
-| }
-| ])
-
-peminjaman>
-
-peminjaman> db.createCollection("koleksibuku", {
-|  validator: {
-|   $jsonSchema: {
-|    bsonType: "object",
-|    required: ["judul","penulis","kategori","tahun_terbit","stok"],
-|    properties: {
-|     judul: {
-|      bsonType: "string"
-|     },
-|     penulis: {
-|      bsonType: "string"
-|     },
-|     kategori: {
-|      bsonType: "string"
-|     },
-|     tahun_terbit: {
-|      bsonType: "int"
-|     },
-|     stok: {
-|      bsonType: "int"
-|     }
-|    }
-|   }
-|  }
-| })
-{ ok: 1 }
-peminjaman>
+peminjaman> db.pinjambuku.find({_id:6})
 
 peminjaman>
 
